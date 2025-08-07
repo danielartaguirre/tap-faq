@@ -150,6 +150,54 @@
       color: inherit;
     }
 
+    /* Header */
+    header.site-header {
+      background-color: #ffffff;
+      border-bottom: 1px solid #dcdcdc;
+    }
+    header.site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header.site-header .brand img {
+      height: 40px;
+    }
+    header.site-header .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    header.site-header .main-nav a {
+      text-decoration: none;
+      color: #0096d6;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer.site-footer {
+      background-color: #f0f0f0;
+      border-top: 1px solid #dcdcdc;
+      margin-top: 40px;
+      padding: 20px 0;
+    }
+    footer.site-footer .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    footer.site-footer nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+    footer.site-footer nav a {
+      text-decoration: none;
+      color: #0096d6;
+      font-size: 14px;
+    }
+
     /* Responsive: stack tiles on small screens */
     @media (max-width: 640px) {
       .tile-container {
@@ -160,9 +208,24 @@
       }
     }
   </style>
-</head>
-<body>
-  <div class="container">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="https://www.taptogo.net/">
+          <img src="https://www.taptogo.net/resource/1738884380000/TapCommunity/img/tap-logo-transparent.png" alt="TAP">
+        </a>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="https://www.taptogo.net/articles/en_US/Website_content/about-tap">About TAP</a></li>
+            <li><a href="https://www.taptogo.net/TAPPurchase">Buy TAP</a></li>
+            <li><a href="https://www.taptogo.net/Transit">Programs</a></li>
+            <li><a href="https://www.taptogo.net/LIFE">Discounts</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
     <!-- Search Bar -->
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search FAQs" />
@@ -257,6 +320,18 @@
       </div>
     </div>
   </div>
+  <footer class="site-footer">
+    <div class="container">
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="https://www.taptogo.net/">Home</a></li>
+          <li><a href="https://www.taptogo.net/TAPFAQ">FAQs</a></li>
+          <li><a href="https://www.taptogo.net/contactus">Contact Us</a></li>
+        </ul>
+      </nav>
+      <p>© 2025 TAP. All rights reserved.</p>
+    </div>
+  </footer>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const searchInput = document.getElementById('searchInput');
