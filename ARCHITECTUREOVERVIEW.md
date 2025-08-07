@@ -1,20 +1,24 @@
 # Architecture Overview
 
 This project produces static HTML fragments representing each Frequently Asked
-Question. The markup is organized into sections and uses simple accordion
-components for expanding and collapsing answers.
+Question. The markup is organized so that each FAQ section itself behaves as an
+accordion. Sections can contain optional subsections, and questions live within
+those subsections.
 
 ## FAQ HTML structure
 
-- **Section headers** – Each FAQ category begins with an `<h2>` that labels the
-  section.
-- **Accordion list** – Questions and answers live inside a definition list with
-  the class `accordion`:
-  - `<dt>` elements contain the question text and act as the clickable headers.
-  - `<dd>` elements hold the answer content that is shown or hidden.
+- **Section accordion** – Each top‑level category is a `<section>` that opens and
+  closes like an accordion. The `<h2>` inside the section acts as the clickable
+  header.
+- **Subsections** – Within the expanded section, group related questions under
+  `<h3>` subsection headings. Every subsection contains its own definition list
+  (`<dl>`).
+- **Question list** – Inside each subsection's `<dl>`, use `<dt>` for the
+  question text and `<dd>` for the answer. If a section has no subsections, place
+  the `<dl>` directly inside the section instead of using an `<h3>`.
 - **Styling** – The snippets rely on the host site's existing CSS for fonts and
-  accordion behavior. Ensure the class names above are available where the FAQ
-  is embedded.
+  accordion behavior. Ensure the class names above are available where the FAQ is
+  embedded.
 
 ## CSV as reference only
 
@@ -22,17 +26,32 @@ components for expanding and collapsing answers.
 repository are *strictly* human‑readable references while authoring the HTML.
 They must not be parsed, imported, or included in any build process.
 
-## Example FAQ item
+## Example FAQ structure
 
 ```html
-<section>
+<section class="accordion">
   <h2>Using the TAP App</h2>
-  <dl class="accordion">
-    <dt>How do I reset my password?</dt>
-    <dd>
-      <p>Open the TAP app and select "Forgot Password" on the sign‑in screen...</p>
-    </dd>
-  </dl>
+  <div class="accordion-panel">
+    <h3>Managing Your Account</h3>
+    <dl>
+      <dt>How do I reset my password?</dt>
+      <dd>
+        <p>Open the TAP app and select "Forgot Password" on the sign‑in screen...</p>
+      </dd>
+    </dl>
+  </div>
+</section>
+
+<section class="accordion">
+  <h2>Getting a TAP Card</h2>
+  <div class="accordion-panel">
+    <dl>
+      <dt>Where can I buy a TAP card?</dt>
+      <dd>
+        <p>TAP cards are sold at vendor locations and ticket machines...</p>
+      </dd>
+    </dl>
+  </div>
 </section>
 ```
 
