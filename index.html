@@ -139,24 +139,19 @@
         width: 100%;
     }
 
-    .question::after {
-      content: '\25B6';
-      color: #0096d6;
-      transition: transform 0.3s ease;
-    }
-
-    li.open .question::after {
-      transform: rotate(90deg);
-    }
-
     .faq-section-header::after {
-      content: '\25B6';
-      color: #0096d6;
+      content: " ";
+      border-top: 6px #0096d6 solid;
+      border-right: 6px #0096d6 solid;
+      width: 18px;
+      height: 18px;
+      transform: rotate(135deg);
       transition: transform 0.3s ease;
+      display: inline-block;
     }
 
     .faq-section.open .faq-section-header::after {
-      transform: rotate(90deg);
+      transform: rotate(315deg);
     }
 
     /* Header */
