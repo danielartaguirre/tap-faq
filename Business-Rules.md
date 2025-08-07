@@ -18,7 +18,18 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
   - `/resources/TAP FAQs page.html`
   - `/resources/TAP App FAQs page.html`
   - `/resources/TAP-FAQ-existing-structure.csv`
-  - make the accordions as the sectiosn from csv, and have sub sections within the accordion for the questions as organized in the csv
+  - make the accordions as the sections from csv, and have sub sections within the accordion for the questions as organized in the csv
+  Accordion sections:
+  1. About TAP
+  2. Using Your TAP Card
+  3. Managing Fare on Your TAP Card
+  4. TAP card Features
+  5. Employer TAP Cards
+  6. Reduced Fare TAP cards
+  7. Programs
+  8. iPhone - TAP App
+  9. Android - TAP App
+  10. App Overview
 
 ---
 
