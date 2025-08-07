@@ -2,7 +2,9 @@
 
 This repository stores the static markup used to build the TAP FAQ pages. No
 runtime generation or CSV processing is performed here—everything is written as
-HTML snippets that can be dropped directly into the production site.
+HTML snippets that can be dropped directly into the production site. The FAQ
+interface uses a simple search bar and accordion sections; earlier tile-based
+navigation has been removed.
 
 See [ARCHITECTUREOVERVIEW.md](ARCHITECTUREOVERVIEW.md) for details on the
 overall HTML structure and guidance on integrating the snippets.

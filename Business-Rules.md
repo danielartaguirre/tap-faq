@@ -40,7 +40,7 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 ### 3.1 Color Tokens
 ```css
 --tap-blue       : #0096D6;   /* Primary */
---tap-light-blue : #6FC4E9;   /* Selected tile / hover */
+--tap-light-blue : #6FC4E9;   /* Hover */
 --tap-orange     : #DB7D07;   /* Highlights / warnings */
 --tap-grey-bg    : #F2F6F9;   /* Light backgrounds */
 --tap-white      : #FFFFFF;
@@ -59,7 +59,7 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 | Base unit     | 8 px grid                                         |
 | Desktop grid  | 12 columns, 80 px gutter                          |
 | Mobile grid   | 4 columns, 16 px gutter                           |
-| Corner radius | 8 px (tiles / accordions), 15 px (search bar)     |
+| Corner radius | 8 px (accordions), 15 px (search bar)     |
 | Shadow        | 0 2 4 0 rgba(0,0,0,0.08) on hover / active panels |
 
 ### 3.4 Components
@@ -68,12 +68,6 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 - Height 60 px, full-width.
 - BG `var(--tap-grey-bg)` with 1 px border `#D0D0D0`.
 - Placeholder style 18 px / `var(--tap-text-dark)`.
-
-**Category Tile**
-
-- Size 170 × 130 px desktop, 160 × 140 px mobile.
-- BG `var(--tap-blue)`; selected → `var(--tap-light-blue)` + 2 px outline `var(--tap-blue)`.
-- Icon circle 60 px, white abbreviation label 20 px bold.
 
 **Accordion Header**
 
@@ -95,21 +89,19 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 ```
 
 ### 3.5 Behaviour & States
-- Tiles multi-select: Users can toggle any combination; state drives accordion open/close.
 - **Search:**
   - Case-insensitive substring match across questions and answers.
   - On input: expand categories with hits, collapse others, highlight matches.
-  - Empty query → restore pre-search selection.
+  - Empty query → restore pre-search open state.
   - No-results state: Centered illustration + “No FAQs matched your search” in `var(--tap-orange)`.
 
 ### 3.6 Accessibility
 - All interactive elements are real `<button>` or `<a>` with `aria-expanded` where applicable.
-- Keyboard ↔ : Tab focuses tile, Enter toggles; arrow keys navigate tiles in row / grid.
+- Keyboard: Tab focuses accordion headers, Enter toggles sections.
 - Colour contrast ≥ 4.5:1 for all text.
 - Focus ring 2 px outline `var(--tap-orange)` (WCAG AA visible).
 
 ### 3.7 Motion
-- Tiles hover: 0.15 s background fade.
 - Accordion: 0.2 s ease-in-out height animation; chevron syncs.
 
 ---
