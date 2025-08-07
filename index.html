@@ -64,15 +64,26 @@
       flex: 1 0 calc(20% - 10px);
       text-align: center;
       padding: 10px;
-      border: 1px solid #0096d6;
+      border: 2px solid #b1b1b1;
       border-radius: 8px;
       cursor: pointer;
-      color: #0096d6;
+      color: #9b9b9b;
       user-select: none;
+      background: #f6f6f6;
+      transition: 300ms all;
+    }
+    .styled-list li:hover {
+      background-color: #bee2f2;
+      color: #0096d6;
     }
     .styled-list li.active {
       background-color: #0096d6;
       color: #ffffff;
+    }
+    @media (max-width: 600px) {
+      .styled-list li {
+        flex: 1 0 calc(50% - 10px);
+      }
     }
 
     /* Accordion sections */
