@@ -14,7 +14,7 @@
 
     body {
       font-family: Arial, sans-serif;
-      background-color: #f7f9fa;
+      background-color: #ffffff;
       color: #333;
     }
 
@@ -26,27 +26,88 @@
 
     /* Search bar */
     .search-container {
-      position: relative;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 9999px;
+      padding: 4px 12px;
       margin-bottom: 25px;
     }
 
     .search-container input {
-      width: 100%;
-      padding: 14px 45px 14px 14px;
-      border: 1px solid #ccc;
-      border-radius: 15px;
-      font-size: 16px;
+      flex: 1;
+      border: none;
       outline: none;
+      font-size: 16px;
+      padding: 8px;
+      background: transparent;
+    }
+
+    .search-container button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      padding: 0 8px;
     }
 
     .search-container .search-icon {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 18px;
       color: #0096d6;
-      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .search-container .search-icon:hover {
+      opacity: 1;
+    }
+
+    .search-container .clear-icon {
+      color: #66b2ff;
+      display: none;
+    }
+
+    .search-container .clear-icon:hover {
+      color: #0096d6;
+    }
+
+    /* Category list */
+    .list-container {
+      margin-bottom: 20px;
+    }
+    .styled-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0;
+    }
+    .styled-list li {
+      flex: 1 0 calc(20% - 10px);
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #b1b1b1;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #707070;
+      user-select: none;
+      background: #f6f6f6;
+      transition: 300ms all;
+    }
+    .styled-list li:hover {
+      background-color: #bee2f2;
+      color: #0096d6;
+    }
+    .styled-list li.active {
+      background-color: #dff6ff;
+      color: #0096d6;
+      border: 1px solid #0096d6;
+    }
+    @media (max-width: 600px) {
+      .styled-list li {
+        flex: 1 0 calc(50% - 10px);
+      }
     }
 
     /* Accordion sections */
@@ -59,7 +120,7 @@
 
     .faq-section-header {
       background-color: #e6f3fa;
-      padding: 12px 16px;
+      padding: 18px 20px 18px 16px;
       font-weight: bold;
       color: #0096d6;
       cursor: pointer;
@@ -223,7 +284,22 @@
     <!-- Search Bar -->
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search FAQs">
-      <span class="search-icon">🔍</span>
+      <button type="button" id="clearSearch" class="clear-icon" aria-label="Clear search">✕</button>
+      <button type="button" id="searchButton" class="search-icon" aria-label="Search">🔍</button>
+    </div>
+    <div class="list-container">
+      <ul class="styled-list">
+        <li data-section="section0" class="active">About TAP</li>
+        <li data-section="section1">Using Your TAP card</li>
+        <li data-section="section2">Managing Fare on Your TAP card</li>
+        <li data-section="section3">TAP card Features</li>
+        <li data-section="section4">Employer TAP cards</li>
+        <li data-section="section5">Reduced Fare TAP cards</li>
+        <li data-section="section6">Programs</li>
+        <li data-section="section7">iPhone: TAP App</li>
+        <li data-section="section8">Android: TAP App</li>
+        <li data-section="section9">TAP App Overview</li>
+      </ul>
     </div>
     <!-- Accordion Sections for each Category -->
     <div class="faq-section open" id="section0">
@@ -528,7 +604,7 @@
       </div>
     </div>
     <div class="faq-section" id="section7">
-      <div class="faq-section-header">iphone</div>
+      <div class="faq-section-header">iPhone: TAP App</div>
       <div class="faq-section-content">
         <h3>Add a TAP card to your iPhone and Apple Watch</h3>
         <ul>
@@ -758,7 +834,7 @@
       </div>
     </div>
     <div class="faq-section" id="section8">
-      <div class="faq-section-header">android</div>
+      <div class="faq-section-header">Android: TAP App</div>
       <div class="faq-section-content">
         <h3>Add a TAP card to your Android phone</h3>
         <ul>
@@ -1038,11 +1114,12 @@
     </div>
   </footer>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('searchInput');
-      const sections = document.querySelectorAll('.faq-section');
-      // Keep track of open sections before search
-      let preSearchOpen = [];
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const sections = document.querySelectorAll('.faq-section');
+        const categoryItems = document.querySelectorAll('.styled-list li');
+        // Keep track of open sections before search
+        let preSearchOpen = [];
 
       // Store original question text for highlighting
       sections.forEach((section) => {
@@ -1053,34 +1130,75 @@
       });
 
       // Toggle section when header is clicked
-      sections.forEach((section) => {
-        const header = section.querySelector('.faq-section-header');
-        header.addEventListener('click', () => {
-          // In search mode, ignore header clicks
-          if (searchInput.value.trim() !== '') return;
-          section.classList.toggle('open');
-        });
-        // Toggle individual questions
-        section.querySelectorAll('li').forEach((li) => {
-          li.addEventListener('click', () => {
+        sections.forEach((section, idx) => {
+          const header = section.querySelector('.faq-section-header');
+          header.addEventListener('click', () => {
+            // In search mode, ignore header clicks
             if (searchInput.value.trim() !== '') return;
-            li.classList.toggle('open');
+            section.classList.toggle('open');
+            updateCategoryStates();
+          });
+          // Toggle individual questions
+          section.querySelectorAll('li').forEach((li) => {
+            li.addEventListener('click', () => {
+              if (searchInput.value.trim() !== '') return;
+              li.classList.toggle('open');
+            });
           });
         });
+
+        categoryItems.forEach((item, idx) => {
+          item.addEventListener('click', () => {
+            if (searchInput.value.trim() !== '') return;
+            sections[idx].classList.toggle('open');
+            updateCategoryStates();
+          });
+        });
+
+        function updateCategoryStates() {
+          sections.forEach((section, idx) => {
+            if (section.classList.contains('open')) {
+              categoryItems[idx].classList.add('active');
+            } else {
+              categoryItems[idx].classList.remove('active');
+            }
+          });
+        }
+
+      const clearBtn = document.getElementById('clearSearch');
+      const searchBtn = document.getElementById('searchButton');
+
+      clearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        toggleClear();
+        handleSearch();
+        searchInput.focus();
       });
 
-      // Search functionality
+      searchBtn.addEventListener('click', handleSearch);
+
       searchInput.addEventListener('input', () => {
+        toggleClear();
+        handleSearch();
+      });
+
+      function toggleClear() {
+        if (searchInput.value.trim() !== '') {
+          clearBtn.style.display = 'flex';
+        } else {
+          clearBtn.style.display = 'none';
+        }
+      }
+
+      function handleSearch() {
         const term = searchInput.value.trim().toLowerCase();
         if (term === '') {
-          // When search cleared, restore original open states
           sections.forEach((section, idx) => {
             if (preSearchOpen.includes(idx)) {
               section.classList.add('open');
             } else {
               section.classList.remove('open');
             }
-            // Restore all questions
             section.querySelectorAll('li').forEach((li) => {
               li.style.display = '';
               li.classList.remove('open');
@@ -1089,15 +1207,16 @@
             });
           });
           preSearchOpen = [];
+          updateCategoryStates();
           return;
         }
-        // Store current open state only once at the beginning of search
+
         if (preSearchOpen.length === 0) {
           sections.forEach((section, idx) => {
             if (section.classList.contains('open')) preSearchOpen.push(idx);
           });
         }
-        // For each category, check if any question matches
+
         sections.forEach((section, idx) => {
           let hasMatch = false;
           section.querySelectorAll('li').forEach((li) => {
@@ -1124,8 +1243,12 @@
             section.classList.remove('open');
           }
         });
+        updateCategoryStates();
+      }
+
+      updateCategoryStates();
+      toggleClear();
       });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
