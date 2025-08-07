@@ -31,7 +31,7 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 7. Programs
 8. iPhone - TAP App
 9. Android - TAP App
-10. App Overview
+10. TAP App Overview
 
 ---
 
