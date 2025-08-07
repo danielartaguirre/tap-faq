@@ -12,6 +12,13 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
   - `/resources/TAP-FAQ-existing-structure.csv`
 - **Deliverable:** Responsive HTML/CSS/JS that can be deployed as a standalone FAQ webpage or integrated into taptogo.net.
 
+## 1.2 FAQ Content
+- **FAQ Structure:** Merge and optimize two existing FAQ pages (`TAPFAQ` and `TAPAppFAQs`) into one unified, categorized FAQ.
+- **Source Content:**
+  - `/resources/TAP FAQs page.html`
+  - `/resources/TAP App FAQs page.html`
+  - `/resources/TAP-FAQ-existing-structure.csv`
+  - make the accordions as the sectiosn from csv, and have sub sections within the accordion for the questions as organized in the csv
 ---
 
 ## 3. UI Guidelines
@@ -60,23 +67,11 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 ## 5. HTML Structure Guidelines
 
 - **Semantic Markup:**
-  - Use modern HTML5 elements: `<header>`, `<nav>`, `<main>`, `<section>`, and `<footer>`.
+  - Use modern HTML5 elements: `<header>`, `<nav>`, `<section>`, etc.
   - Include `<form role="search">` for the search box.
   - Use `<section>` per FAQ category with an `id` matching its name (e.g. `<section id="using-tap">`).
 - **Header & Footer:**
   - Embed the standard header and footer from [taptogo.net](http://taptogo.net/) so the page can be previewed via GitHub Pages and match the main site’s chrome.
-- **Accordion Markup Example:**
-  ```html
-  <dl class="faq-accordion" aria-labelledby="using-tap-heading">
-    <dt id="q1" aria-controls="a1">
-      <button aria-expanded="false">How do I use TAP?</button>
-    </dt>
-    <dd id="a1" aria-labelledby="q1" hidden>
-      <p>Simply tap your card on the TAP …</p>
-    </dd>
-    <!-- more items… -->
-  </dl>
-  ```
 
 ---
 
@@ -85,5 +80,5 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 - **FAQ Schema:** Implement [schema.org](https://schema.org) `FAQPage` markup to help search engines understand the content.
   - Each question should use the `Question` type with `name` and `acceptedAnswer`.
   - Answers should use the `Answer` type inside `acceptedAnswer`.
-  - Use JSON-LD in a `<script type="application/ld+json">` block in the page `<head>`.
+  - Use microdata inline html
 
