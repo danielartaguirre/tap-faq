@@ -21,7 +21,7 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
   - make the accordions as the sections from csv, and have sub sections within the accordion for the questions as organized in the csv
   
 
-  Accordion sections:
+### 2.1 Accordion sections:
 1. About TAP
 2. Using Your TAP Card
 3. Managing Fare on Your TAP Card
