@@ -1232,41 +1232,44 @@
     </div>
   </footer>
   <script>
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('searchInput');
         const sections = document.querySelectorAll('.faq-section');
         const categoryItems = document.querySelectorAll('.styled-list li');
+        function forEach(collection, callback) {
+          Array.prototype.forEach.call(collection, callback);
+        }
         // Keep track of open sections before search
         let preSearchOpen = [];
 
       // Store original question text for highlighting
-      sections.forEach((section) => {
-        section.querySelectorAll('li').forEach((li) => {
+      forEach(sections, function(section) {
+        forEach(section.querySelectorAll('li'), function(li) {
           const questionSpan = li.querySelector('.question');
           li.setAttribute('data-original', questionSpan.textContent);
         });
       });
 
       // Toggle section when header is clicked
-        sections.forEach((section, idx) => {
+        forEach(sections, function(section, idx) {
           const header = section.querySelector('.faq-section-header');
-          header.addEventListener('click', () => {
+          header.addEventListener('click', function() {
             // In search mode, ignore header clicks
             if (searchInput.value.trim() !== '') return;
             section.classList.toggle('open');
             updateCategoryStates();
           });
           // Toggle individual questions
-          section.querySelectorAll('li').forEach((li) => {
-            li.addEventListener('click', () => {
+          forEach(section.querySelectorAll('li'), function(li) {
+            li.addEventListener('click', function() {
               if (searchInput.value.trim() !== '') return;
               li.classList.toggle('open');
             });
           });
         });
 
-        categoryItems.forEach((item, idx) => {
-          item.addEventListener('click', () => {
+        forEach(categoryItems, function(item, idx) {
+          item.addEventListener('click', function() {
             if (searchInput.value.trim() !== '') return;
             sections[idx].classList.toggle('open');
             updateCategoryStates();
@@ -1274,7 +1277,7 @@
         });
 
         function updateCategoryStates() {
-          sections.forEach((section, idx) => {
+          forEach(sections, function(section, idx) {
             if (section.classList.contains('open')) {
               categoryItems[idx].classList.add('active');
             } else {
@@ -1286,7 +1289,7 @@
       const clearBtn = document.getElementById('clearSearch');
       const searchBtn = document.getElementById('searchButton');
 
-      clearBtn.addEventListener('click', () => {
+      clearBtn.addEventListener('click', function() {
         searchInput.value = '';
         toggleClear();
         handleSearch();
@@ -1295,7 +1298,7 @@
 
       searchBtn.addEventListener('click', handleSearch);
 
-      searchInput.addEventListener('input', () => {
+      searchInput.addEventListener('input', function() {
         toggleClear();
         handleSearch();
       });
@@ -1311,13 +1314,13 @@
       function handleSearch() {
         const term = searchInput.value.trim().toLowerCase();
         if (term === '') {
-          sections.forEach((section, idx) => {
+          forEach(sections, function(section, idx) {
             if (preSearchOpen.includes(idx)) {
               section.classList.add('open');
             } else {
               section.classList.remove('open');
             }
-            section.querySelectorAll('li').forEach((li) => {
+            forEach(section.querySelectorAll('li'), function(li) {
               li.style.display = '';
               li.classList.remove('open');
               const questionSpan = li.querySelector('.question');
@@ -1330,14 +1333,14 @@
         }
 
         if (preSearchOpen.length === 0) {
-          sections.forEach((section, idx) => {
+          forEach(sections, function(section, idx) {
             if (section.classList.contains('open')) preSearchOpen.push(idx);
           });
         }
 
-        sections.forEach((section, idx) => {
+        forEach(sections, function(section, idx) {
           let hasMatch = false;
-          section.querySelectorAll('li').forEach((li) => {
+          forEach(section.querySelectorAll('li'), function(li) {
             const originalText = li.getAttribute('data-original');
             const answerText = li.querySelector('.answer').textContent.toLowerCase();
             const lowerOriginal = originalText.toLowerCase();
@@ -1347,7 +1350,7 @@
               li.classList.add('open');
               const regex = new RegExp(term, 'gi');
               const questionSpan = li.querySelector('.question');
-              questionSpan.innerHTML = originalText.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+              questionSpan.innerHTML = originalText.replace(regex, function(match) { return '<span class="highlight">' + match + '</span>'; });
             } else {
               li.style.display = 'none';
               li.classList.remove('open');
