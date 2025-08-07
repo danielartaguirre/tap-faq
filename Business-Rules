@@ -7,22 +7,10 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 ## 1. Project Overview
 - **Goal:** Merge and optimize two existing FAQ pages (`TAPFAQ` and `TAPAppFAQs`) into one unified, categorized FAQ.
 - **Source Content:**  
-  - `/mnt/data/TAP FAQs page.html`  
-  - `/mnt/data/TAP App FAQs page.html`  
-  - CSVs of question lists for reference.
-- **Deliverable:** Responsive HTML/CSS/JS that can be deployed as a standalone FAQ webpage or integrated into a site.
-
----
-
-## 2. Category Structure
-1. **General Information & Getting a TAP Card**  
-2. **Using TAP on Transit & Other Services**  
-3. **Managing Your TAP Card & Account**  
-4. **Adding Fare, Fare Products & Payment Options**  
-5. **TAP Mobile App & Digital TAP Cards**  
-6. **Discounts & Special Programs**
-
-> All questions must be mapped into exactly one of these six categories.  
+  - `/resources/TAP FAQs page.html`  
+  - `/resources/TAP App FAQs page.html`  
+  - `/resources/TAP-FAQ-existing-structure.csv`  
+- **Deliverable:** Responsive HTML/CSS/JS that can be deployed as a standalone FAQ webpage or integrated into taptogo.net.
 
 ---
 
@@ -34,7 +22,7 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
   - Active category clearly highlighted (e.g. underlined or background tint).
 - **Accordions:**  
   - Within each category, questions appear in an accordion list.  
-  - Use `<dl class="faq-accordion">` with `<dt>` for the question and `<dd>` for the answer.
+  - Use 
   - Only one question may be open at a time _per category_ (close previously open when opening a new one).
 - **Search Box:**  
   - Always visible at top of page.  
@@ -73,7 +61,6 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
 ## 5. HTML Structure Guidelines
 
 - **Semantic Markup:**  
-  - Use `<nav>` for category navigation.  
   - Use `<form role="search">` for the search box.  
   - Use `<section>` per FAQ category with an `id` matching its name (e.g. `<section id="using-tap">`).  
 - **Accordion Markup Example:**
@@ -87,3 +74,9 @@ A consolidated set of rules and guidelines for building the new TAP FAQs page. U
     </dd>
     <!-- more items… -->
   </dl>
+
+5. Schema 
+- **FAQ Schema**
+- use FAQ schema for questions and answers 
+https://schema.org/Question
+https://schema.org/acceptedAnswer
