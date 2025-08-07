@@ -3,20 +3,349 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TAP FAQ</title>
+  <title>TAP FAQs</title>
   <style>
-    body { font-family: sans-serif; margin: 2rem; line-height: 1.6; }
-    nav a { margin-right: 1rem; }
+    /* Basic reset */
+    *, *:before, *:after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fa;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Search bar */
+    .search-container {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 14px 45px 14px 14px;
+      border: 1px solid #ccc;
+      border-radius: 15px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-container .search-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #0096d6;
+      pointer-events: none;
+    }
+
+    /* Tiles */
+    .tile-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+    }
+
+    .faq-tile {
+      flex: 1;
+      min-width: 160px;
+      max-width: 180px;
+      background-color: #6fc4e9;
+      color: #000;
+      text-align: center;
+      border-radius: 8px;
+      padding: 12px 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .faq-tile.selected {
+      background-color: #0096d6;
+      color: #fff;
+    }
+
+    .faq-tile .icon {
+      width: 46px;
+      height: 46px;
+      margin-bottom: 8px;
+      border-radius: 50%;
+      background-color: #005b8c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .faq-tile .label {
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    /* Accordion sections */
+    .faq-section {
+      border: 1px solid #dcdcdc;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .faq-section-header {
+      background-color: #e6f3fa;
+      padding: 12px 16px;
+      font-weight: bold;
+      color: #0096d6;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-section.open .faq-section-header {
+      background-color: #e6f3fa;
+    }
+
+    .faq-section-content {
+      display: none;
+      background-color: #ffffff;
+      padding: 12px 16px;
+    }
+
+    .faq-section.open .faq-section-content {
+      display: block;
+    }
+
+    .faq-section-content ul {
+      list-style-type: none;
+    }
+
+    .faq-section-content li {
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
+      line-height: 1.4;
+    }
+
+    .faq-section-content li:last-child {
+      border-bottom: none;
+    }
+
+    .highlight {
+      background-color: rgba(219, 125, 7, 0.3);
+      color: inherit;
+    }
+
+    /* Responsive: stack tiles on small screens */
+    @media (max-width: 640px) {
+      .tile-container {
+        flex-wrap: wrap;
+      }
+      .faq-tile {
+        flex: 0 0 calc(50% - 5px);
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>TAP FAQ Project</h1>
-  <p>This site hosts resources for building a unified TAP Frequently Asked Questions page.</p>
-  <nav>
-    <a href="Business-Rules.md">Business Rules</a>
-    <a href="resources/TAP%20General%20FAQs%20page.html">General FAQ Source</a>
-    <a href="resources/TAP%20App%20FAQs%20page.html">App FAQ Source</a>
-  </nav>
-  <p>Content is under development.</p>
+  <div class="container">
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search FAQs" />
+      <span class="search-icon">🔍</span>
+    </div>
+    <!-- Category Tiles -->
+    <div class="tile-container">
+      <div class="faq-tile" data-index="0">
+        <div class="icon">GI</div>
+        <div class="label">General Info & Getting a TAP Card</div>
+      </div>
+      <div class="faq-tile" data-index="1">
+        <div class="icon">UT</div>
+        <div class="label">Using TAP on Transit & Other Services</div>
+      </div>
+      <div class="faq-tile" data-index="2">
+        <div class="icon">MC</div>
+        <div class="label">Managing Your TAP Card & Account</div>
+      </div>
+      <div class="faq-tile" data-index="3">
+        <div class="icon">AF</div>
+        <div class="label">Adding Fare, Fare Products & Payment Options</div>
+      </div>
+      <div class="faq-tile" data-index="4">
+        <div class="icon">MA</div>
+        <div class="label">TAP Mobile App & Digital TAP Cards</div>
+      </div>
+      <div class="faq-tile" data-index="5">
+        <div class="icon">DS</div>
+        <div class="label">Discounts & Special Programs</div>
+      </div>
+    </div>
+    <!-- Accordion Sections for each Category -->
+    <div class="faq-section" id="section0">
+      <div class="faq-section-header">General Information & Getting a TAP Card</div>
+      <div class="faq-section-content">
+        <ul>
+          <li data-original="What is a TAP card?">What is a TAP card?</li>
+          <li data-original="How do I get a TAP card?">How do I get a TAP card?</li>
+          <li data-original="How long is a TAP card valid?">How long is a TAP card valid?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-section" id="section1">
+      <div class="faq-section-header">Using TAP on Transit & Other Services</div>
+      <div class="faq-section-content">
+        <ul>
+          <li data-original="Where is TAP accepted?">Where is TAP accepted?</li>
+          <li data-original="How do I use TAP on buses and trains?">How do I use TAP on buses and trains?</li>
+          <li data-original="Can I use TAP for bike share services?">Can I use TAP for bike share services?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-section" id="section2">
+      <div class="faq-section-header">Managing Your TAP Card & Account</div>
+      <div class="faq-section-content">
+        <ul>
+          <li data-original="How do I check my balance?">How do I check my balance?</li>
+          <li data-original="How do I replace a lost card?">How do I replace a lost card?</li>
+          <li data-original="How do I update my card information?">How do I update my card information?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-section" id="section3">
+      <div class="faq-section-header">Adding Fare, Fare Products & Payment Options</div>
+      <div class="faq-section-content">
+        <ul>
+          <li data-original="How do I add fare to my TAP card?">How do I add fare to my TAP card?</li>
+          <li data-original="What payment methods can I use?">What payment methods can I use?</li>
+          <li data-original="What are the different fare products?">What are the different fare products?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-section" id="section4">
+      <div class="faq-section-header">TAP Mobile App & Digital TAP Cards</div>
+      <div class="faq-section-content">
+        <ul>
+          <li data-original="Can I use my phone as a TAP card?">Can I use my phone as a TAP card?</li>
+          <li data-original="How do I manage my card in the TAP app?">How do I manage my card in the TAP app?</li>
+          <li data-original="Which phones are supported?">Which phones are supported?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="faq-section" id="section5">
+      <div class="faq-section-header">Discounts & Special Programs</div>
+      <div class="faq-section-content">
+        <ul>
+          <li data-original="What discount programs are available?">What discount programs are available?</li>
+          <li data-original="How do I qualify for discounts?">How do I qualify for discounts?</li>
+          <li data-original="What is the LIFE program?">What is the LIFE program?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('searchInput');
+      const tiles = document.querySelectorAll('.faq-tile');
+      const sections = document.querySelectorAll('.faq-section');
+      // Keep track of selection state before search
+      let preSearchSelected = [];
+
+      // Toggle sections when tiles are clicked
+      tiles.forEach((tile) => {
+        const index = parseInt(tile.getAttribute('data-index'));
+        const section = sections[index];
+        tile.addEventListener('click', () => {
+          // In search mode, ignore tile clicks
+          if (searchInput.value.trim() !== '') return;
+          tile.classList.toggle('selected');
+          section.classList.toggle('open');
+        });
+      });
+
+      // Toggle section when header is clicked
+      sections.forEach((section, idx) => {
+        const header = section.querySelector('.faq-section-header');
+        header.addEventListener('click', () => {
+          // In search mode, ignore header clicks
+          if (searchInput.value.trim() !== '') return;
+          sections[idx].classList.toggle('open');
+          tiles[idx].classList.toggle('selected');
+        });
+      });
+
+      // Search functionality
+      searchInput.addEventListener('input', () => {
+        const term = searchInput.value.trim().toLowerCase();
+        if (term === '') {
+          // When search cleared, restore original states
+          sections.forEach((section, idx) => {
+            // Hide or show section based on preSearchSelected
+            if (preSearchSelected.includes(idx)) {
+              section.classList.add('open');
+              tiles[idx].classList.add('selected');
+            } else {
+              section.classList.remove('open');
+              tiles[idx].classList.remove('selected');
+            }
+            // Restore all questions
+            section.querySelectorAll('li').forEach((li) => {
+              li.style.display = '';
+              li.innerHTML = li.getAttribute('data-original');
+            });
+          });
+          preSearchSelected = [];
+          return;
+        }
+        // Store current selected state only once at the beginning of search
+        if (preSearchSelected.length === 0) {
+          tiles.forEach((tile, idx) => {
+            if (tile.classList.contains('selected')) preSearchSelected.push(idx);
+          });
+        }
+        // For each category, check if any question matches
+        sections.forEach((section, idx) => {
+          let hasMatch = false;
+          section.querySelectorAll('li').forEach((li) => {
+            const originalText = li.getAttribute('data-original');
+            const lowerOriginal = originalText.toLowerCase();
+            if (lowerOriginal.includes(term)) {
+              hasMatch = true;
+              li.style.display = '';
+              // Highlight term
+              const regex = new RegExp(term, 'gi');
+              li.innerHTML = originalText.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+            } else {
+              li.style.display = 'none';
+              li.innerHTML = originalText;
+            }
+          });
+          if (hasMatch) {
+            // Show this category and tile as selected
+            section.classList.add('open');
+            tiles[idx].classList.add('selected');
+          } else {
+            // Hide category (collapse) and remove tile selection
+            section.classList.remove('open');
+            tiles[idx].classList.remove('selected');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
