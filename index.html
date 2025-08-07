@@ -1244,7 +1244,7 @@
 
       // Store original question text for highlighting
       forEach(sections, function(section) {
-        forEach(section.querySelectorAll('li'), function(li) {
+        forEach(section.querySelectorAll('.faq-section-content > ul > li'), function(li) {
           const questionSpan = li.querySelector('.question');
           li.setAttribute('data-original', questionSpan.textContent);
         });
@@ -1260,7 +1260,7 @@
             updateCategoryStates();
           });
           // Toggle individual questions
-          forEach(section.querySelectorAll('li'), function(li) {
+          forEach(section.querySelectorAll('.faq-section-content > ul > li'), function(li) {
             li.addEventListener('click', function() {
               if (searchInput.value.trim() !== '') return;
               li.classList.toggle('open');
@@ -1320,7 +1320,7 @@
             } else {
               section.classList.remove('open');
             }
-            forEach(section.querySelectorAll('li'), function(li) {
+            forEach(section.querySelectorAll('.faq-section-content > ul > li'), function(li) {
               li.style.display = '';
               li.classList.remove('open');
               const questionSpan = li.querySelector('.question');
@@ -1340,7 +1340,7 @@
 
         forEach(sections, function(section, idx) {
           let hasMatch = false;
-          forEach(section.querySelectorAll('li'), function(li) {
+          forEach(section.querySelectorAll('.faq-section-content > ul > li'), function(li) {
             const originalText = li.getAttribute('data-original');
             const answerText = li.querySelector('.answer').textContent.toLowerCase();
             const lowerOriginal = originalText.toLowerCase();
