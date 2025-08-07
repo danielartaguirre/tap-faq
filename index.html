@@ -139,10 +139,20 @@
       padding: 6px 0;
       border-bottom: 1px solid #f0f0f0;
       line-height: 1.4;
+      cursor: pointer;
     }
 
     .faq-section-content li:last-child {
       border-bottom: none;
+    }
+
+    .faq-section-content li .answer {
+      display: none;
+      margin-top: 6px;
+    }
+
+    .faq-section-content li.open .answer {
+      display: block;
     }
 
     .highlight {
@@ -225,7 +235,7 @@
         </nav>
       </div>
     </header>
-    <div class="container">
+    <div class="container" itemscope itemtype="https://schema.org/FAQPage">
     <!-- Search Bar -->
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search FAQs" />
@@ -263,9 +273,24 @@
       <div class="faq-section-header">General Information & Getting a TAP Card</div>
       <div class="faq-section-content">
         <ul>
-          <li data-original="What is a TAP card?">What is a TAP card?</li>
-          <li data-original="How do I get a TAP card?">How do I get a TAP card?</li>
-          <li data-original="How long is a TAP card valid?">How long is a TAP card valid?</li>
+          <li data-original="What is a TAP card?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">What is a TAP card?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">A TAP card is a reusable fare card used to pay fares on participating transit systems across the Los Angeles region.</p>
+            </div>
+          </li>
+          <li data-original="How do I get a TAP card?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How do I get a TAP card?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Purchase a card online, at rail stations, or from TAP vendors throughout the region.</p>
+            </div>
+          </li>
+          <li data-original="How long is a TAP card valid?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How long is a TAP card valid?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Most TAP cards remain usable for ten years from the date they are issued.</p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -273,9 +298,24 @@
       <div class="faq-section-header">Using TAP on Transit & Other Services</div>
       <div class="faq-section-content">
         <ul>
-          <li data-original="Where is TAP accepted?">Where is TAP accepted?</li>
-          <li data-original="How do I use TAP on buses and trains?">How do I use TAP on buses and trains?</li>
-          <li data-original="Can I use TAP for bike share services?">Can I use TAP for bike share services?</li>
+          <li data-original="Where is TAP accepted?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">Where is TAP accepted?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">TAP is accepted on Metro and many other transit agencies across Los Angeles County.</p>
+            </div>
+          </li>
+          <li data-original="How do I use TAP on buses and trains?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How do I use TAP on buses and trains?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Simply tap your card on the validator before boarding a bus or when entering a rail station.</p>
+            </div>
+          </li>
+          <li data-original="Can I use TAP for bike share services?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">Can I use TAP for bike share services?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Yes. You can link your TAP account to Metro Bike Share to unlock and pay using Stored Value.</p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -283,9 +323,24 @@
       <div class="faq-section-header">Managing Your TAP Card & Account</div>
       <div class="faq-section-content">
         <ul>
-          <li data-original="How do I check my balance?">How do I check my balance?</li>
-          <li data-original="How do I replace a lost card?">How do I replace a lost card?</li>
-          <li data-original="How do I update my card information?">How do I update my card information?</li>
+          <li data-original="How do I check my balance?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How do I check my balance?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Check your balance through the TAP app, online at taptogo.net, or at any TAP vending machine.</p>
+            </div>
+          </li>
+          <li data-original="How do I replace a lost card?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How do I replace a lost card?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Contact TAP customer service or visit a vendor. Registered cards can have remaining value transferred to a new card.</p>
+            </div>
+          </li>
+          <li data-original="How do I update my card information?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How do I update my card information?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Sign in to your TAP account online or in the app to edit your profile and card details.</p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -293,9 +348,24 @@
       <div class="faq-section-header">Adding Fare, Fare Products & Payment Options</div>
       <div class="faq-section-content">
         <ul>
-          <li data-original="How do I add fare to my TAP card?">How do I add fare to my TAP card?</li>
-          <li data-original="What payment methods can I use?">What payment methods can I use?</li>
-          <li data-original="What are the different fare products?">What are the different fare products?</li>
+          <li data-original="How do I add fare to my TAP card?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How do I add fare to my TAP card?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Load Stored Value or passes online, in the TAP app, at vending machines, or at retail vendors.</p>
+            </div>
+          </li>
+          <li data-original="What payment methods can I use?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">What payment methods can I use?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">TAP accepts major credit and debit cards, cash at vendors or machines, and eligible transit benefits.</p>
+            </div>
+          </li>
+          <li data-original="What are the different fare products?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">What are the different fare products?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Options include Stored Value, single-ride fares, day passes, and special program passes.</p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -303,9 +373,24 @@
       <div class="faq-section-header">TAP Mobile App & Digital TAP Cards</div>
       <div class="faq-section-content">
         <ul>
-          <li data-original="Can I use my phone as a TAP card?">Can I use my phone as a TAP card?</li>
-          <li data-original="How do I manage my card in the TAP app?">How do I manage my card in the TAP app?</li>
-          <li data-original="Which phones are supported?">Which phones are supported?</li>
+          <li data-original="Can I use my phone as a TAP card?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">Can I use my phone as a TAP card?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">With the TAP app, eligible phones can store a digital TAP card in Apple Wallet or Google Wallet for contactless use.</p>
+            </div>
+          </li>
+          <li data-original="How do I manage my card in the TAP app?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How do I manage my card in the TAP app?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Sign in to the app to check balance, reload fare, and manage multiple cards.</p>
+            </div>
+          </li>
+          <li data-original="Which phones are supported?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">Which phones are supported?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Most recent iPhone and Android devices that support Apple Wallet or Google Wallet are compatible.</p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -313,9 +398,24 @@
       <div class="faq-section-header">Discounts & Special Programs</div>
       <div class="faq-section-content">
         <ul>
-          <li data-original="What discount programs are available?">What discount programs are available?</li>
-          <li data-original="How do I qualify for discounts?">How do I qualify for discounts?</li>
-          <li data-original="What is the LIFE program?">What is the LIFE program?</li>
+          <li data-original="What discount programs are available?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">What discount programs are available?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Programs include Senior, Student, Disabled, and the LIFE low‑income assistance program.</p>
+            </div>
+          </li>
+          <li data-original="How do I qualify for discounts?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">How do I qualify for discounts?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">Apply with proof of eligibility such as age, student status, disability, or income level depending on the program.</p>
+            </div>
+          </li>
+          <li data-original="What is the LIFE program?" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <span class="question" itemprop="name">What is the LIFE program?</span>
+            <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+              <p itemprop="text">The LIFE (Low Income Fare is Easy) program offers free rides or fare discounts to eligible low‑income residents.</p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -361,6 +461,13 @@
           sections[idx].classList.toggle('open');
           tiles[idx].classList.toggle('selected');
         });
+        // Toggle individual questions
+        section.querySelectorAll('li').forEach((li) => {
+          li.addEventListener('click', () => {
+            if (searchInput.value.trim() !== '') return;
+            li.classList.toggle('open');
+          });
+        });
       });
 
       // Search functionality
@@ -368,21 +475,23 @@
         const term = searchInput.value.trim().toLowerCase();
         if (term === '') {
           // When search cleared, restore original states
-          sections.forEach((section, idx) => {
-            // Hide or show section based on preSearchSelected
-            if (preSearchSelected.includes(idx)) {
-              section.classList.add('open');
-              tiles[idx].classList.add('selected');
-            } else {
-              section.classList.remove('open');
-              tiles[idx].classList.remove('selected');
-            }
-            // Restore all questions
-            section.querySelectorAll('li').forEach((li) => {
-              li.style.display = '';
-              li.innerHTML = li.getAttribute('data-original');
+            sections.forEach((section, idx) => {
+              // Hide or show section based on preSearchSelected
+              if (preSearchSelected.includes(idx)) {
+                section.classList.add('open');
+                tiles[idx].classList.add('selected');
+              } else {
+                section.classList.remove('open');
+                tiles[idx].classList.remove('selected');
+              }
+              // Restore all questions
+              section.querySelectorAll('li').forEach((li) => {
+                li.style.display = '';
+                li.classList.remove('open');
+                const questionSpan = li.querySelector('.question');
+                questionSpan.innerHTML = li.getAttribute('data-original');
+              });
             });
-          });
           preSearchSelected = [];
           return;
         }
@@ -393,26 +502,30 @@
           });
         }
         // For each category, check if any question matches
-        sections.forEach((section, idx) => {
-          let hasMatch = false;
-          section.querySelectorAll('li').forEach((li) => {
-            const originalText = li.getAttribute('data-original');
-            const lowerOriginal = originalText.toLowerCase();
-            if (lowerOriginal.includes(term)) {
-              hasMatch = true;
-              li.style.display = '';
-              // Highlight term
-              const regex = new RegExp(term, 'gi');
-              li.innerHTML = originalText.replace(regex, (match) => `<span class="highlight">${match}</span>`);
-            } else {
-              li.style.display = 'none';
-              li.innerHTML = originalText;
-            }
-          });
-          if (hasMatch) {
-            // Show this category and tile as selected
-            section.classList.add('open');
-            tiles[idx].classList.add('selected');
+          sections.forEach((section, idx) => {
+            let hasMatch = false;
+            section.querySelectorAll('li').forEach((li) => {
+              const originalText = li.getAttribute('data-original');
+              const answerText = li.querySelector('.answer').textContent.toLowerCase();
+              const lowerOriginal = originalText.toLowerCase();
+              if (lowerOriginal.includes(term) || answerText.includes(term)) {
+                hasMatch = true;
+                li.style.display = '';
+                li.classList.add('open');
+                const regex = new RegExp(term, 'gi');
+                const questionSpan = li.querySelector('.question');
+                questionSpan.innerHTML = originalText.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+              } else {
+                li.style.display = 'none';
+                li.classList.remove('open');
+                const questionSpan = li.querySelector('.question');
+                questionSpan.innerHTML = originalText;
+              }
+            });
+            if (hasMatch) {
+              // Show this category and tile as selected
+              section.classList.add('open');
+              tiles[idx].classList.add('selected');
           } else {
             // Hide category (collapse) and remove tile selection
             section.classList.remove('open');
