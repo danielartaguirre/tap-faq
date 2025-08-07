@@ -49,6 +49,32 @@
       pointer-events: none;
     }
 
+    /* Category list */
+    .list-container {
+      margin-bottom: 20px;
+    }
+    .styled-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0;
+    }
+    .styled-list li {
+      flex: 1 0 calc(20% - 10px);
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #0096d6;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #0096d6;
+      user-select: none;
+    }
+    .styled-list li.active {
+      background-color: #0096d6;
+      color: #ffffff;
+    }
+
     /* Accordion sections */
     .faq-section {
       border: 1px solid #dcdcdc;
@@ -224,6 +250,20 @@
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Search FAQs">
       <span class="search-icon">🔍</span>
+    </div>
+    <div class="list-container">
+      <ul class="styled-list">
+        <li data-section="section0" class="active">About TAP</li>
+        <li data-section="section1">Using Your TAP card</li>
+        <li data-section="section2">Managing Fare on Your TAP card</li>
+        <li data-section="section3">TAP card Features</li>
+        <li data-section="section4">Employer TAP cards</li>
+        <li data-section="section5">Reduced Fare TAP cards</li>
+        <li data-section="section6">Programs</li>
+        <li data-section="section7">iphone</li>
+        <li data-section="section8">android</li>
+        <li data-section="section9">App Overview</li>
+      </ul>
     </div>
     <!-- Accordion Sections for each Category -->
     <div class="faq-section open" id="section0">
@@ -1038,11 +1078,12 @@
     </div>
   </footer>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('searchInput');
-      const sections = document.querySelectorAll('.faq-section');
-      // Keep track of open sections before search
-      let preSearchOpen = [];
+      document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const sections = document.querySelectorAll('.faq-section');
+        const categoryItems = document.querySelectorAll('.styled-list li');
+        // Keep track of open sections before search
+        let preSearchOpen = [];
 
       // Store original question text for highlighting
       sections.forEach((section) => {
@@ -1053,44 +1094,64 @@
       });
 
       // Toggle section when header is clicked
-      sections.forEach((section) => {
-        const header = section.querySelector('.faq-section-header');
-        header.addEventListener('click', () => {
-          // In search mode, ignore header clicks
-          if (searchInput.value.trim() !== '') return;
-          section.classList.toggle('open');
-        });
-        // Toggle individual questions
-        section.querySelectorAll('li').forEach((li) => {
-          li.addEventListener('click', () => {
+        sections.forEach((section, idx) => {
+          const header = section.querySelector('.faq-section-header');
+          header.addEventListener('click', () => {
+            // In search mode, ignore header clicks
             if (searchInput.value.trim() !== '') return;
-            li.classList.toggle('open');
+            section.classList.toggle('open');
+            updateCategoryStates();
+          });
+          // Toggle individual questions
+          section.querySelectorAll('li').forEach((li) => {
+            li.addEventListener('click', () => {
+              if (searchInput.value.trim() !== '') return;
+              li.classList.toggle('open');
+            });
           });
         });
-      });
+
+        categoryItems.forEach((item, idx) => {
+          item.addEventListener('click', () => {
+            if (searchInput.value.trim() !== '') return;
+            sections[idx].classList.toggle('open');
+            updateCategoryStates();
+          });
+        });
+
+        function updateCategoryStates() {
+          sections.forEach((section, idx) => {
+            if (section.classList.contains('open')) {
+              categoryItems[idx].classList.add('active');
+            } else {
+              categoryItems[idx].classList.remove('active');
+            }
+          });
+        }
 
       // Search functionality
       searchInput.addEventListener('input', () => {
         const term = searchInput.value.trim().toLowerCase();
         if (term === '') {
           // When search cleared, restore original open states
-          sections.forEach((section, idx) => {
-            if (preSearchOpen.includes(idx)) {
-              section.classList.add('open');
-            } else {
-              section.classList.remove('open');
-            }
-            // Restore all questions
-            section.querySelectorAll('li').forEach((li) => {
-              li.style.display = '';
-              li.classList.remove('open');
-              const questionSpan = li.querySelector('.question');
-              questionSpan.innerHTML = li.getAttribute('data-original');
+            sections.forEach((section, idx) => {
+              if (preSearchOpen.includes(idx)) {
+                section.classList.add('open');
+              } else {
+                section.classList.remove('open');
+              }
+              // Restore all questions
+              section.querySelectorAll('li').forEach((li) => {
+                li.style.display = '';
+                li.classList.remove('open');
+                const questionSpan = li.querySelector('.question');
+                questionSpan.innerHTML = li.getAttribute('data-original');
+              });
             });
-          });
-          preSearchOpen = [];
-          return;
-        }
+            preSearchOpen = [];
+            updateCategoryStates();
+            return;
+          }
         // Store current open state only once at the beginning of search
         if (preSearchOpen.length === 0) {
           sections.forEach((section, idx) => {
@@ -1098,34 +1159,36 @@
           });
         }
         // For each category, check if any question matches
-        sections.forEach((section, idx) => {
-          let hasMatch = false;
-          section.querySelectorAll('li').forEach((li) => {
-            const originalText = li.getAttribute('data-original');
-            const answerText = li.querySelector('.answer').textContent.toLowerCase();
-            const lowerOriginal = originalText.toLowerCase();
-            if (lowerOriginal.includes(term) || answerText.includes(term)) {
-              hasMatch = true;
-              li.style.display = '';
-              li.classList.add('open');
-              const regex = new RegExp(term, 'gi');
-              const questionSpan = li.querySelector('.question');
-              questionSpan.innerHTML = originalText.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+          sections.forEach((section, idx) => {
+            let hasMatch = false;
+            section.querySelectorAll('li').forEach((li) => {
+              const originalText = li.getAttribute('data-original');
+              const answerText = li.querySelector('.answer').textContent.toLowerCase();
+              const lowerOriginal = originalText.toLowerCase();
+              if (lowerOriginal.includes(term) || answerText.includes(term)) {
+                hasMatch = true;
+                li.style.display = '';
+                li.classList.add('open');
+                const regex = new RegExp(term, 'gi');
+                const questionSpan = li.querySelector('.question');
+                questionSpan.innerHTML = originalText.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+              } else {
+                li.style.display = 'none';
+                li.classList.remove('open');
+                const questionSpan = li.querySelector('.question');
+                questionSpan.innerHTML = originalText;
+              }
+            });
+            if (hasMatch) {
+              section.classList.add('open');
             } else {
-              li.style.display = 'none';
-              li.classList.remove('open');
-              const questionSpan = li.querySelector('.question');
-              questionSpan.innerHTML = originalText;
+              section.classList.remove('open');
             }
           });
-          if (hasMatch) {
-            section.classList.add('open');
-          } else {
-            section.classList.remove('open');
-          }
+          updateCategoryStates();
         });
+        updateCategoryStates();
       });
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
